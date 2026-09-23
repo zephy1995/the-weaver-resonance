@@ -1,1 +1,229 @@
-PLACEHOLDER_LANDING
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weaver: Resonance</title>
+<meta name="description" content="Stabilise a collapsing reality in short, intense sessions — then recover in a luminous sanctuary. A hybrid-casual strategy game.">
+<style>
+  :root{
+    --bg:#1A1A2E; --bg2:#16213e; --ink:#0f3460;
+    --cyan:#4ECDC4; --amber:#F7B731; --purple:#5F27CD;
+    --red:#E94560; --gold:#FDCB6E; --coral:#E17055;
+    --text:#FFFFFF; --sub:#B2BEC3; --panel:#2D3436;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+  .glow{text-shadow:0 0 12px currentColor}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(ellipse 60% 45% at 50% 110%, rgba(253,203,110,.14), transparent 60%),
+    radial-gradient(ellipse 45% 35% at 80% -5%, rgba(78,205,196,.10), transparent 60%),
+    radial-gradient(ellipse 45% 35% at 10% 20%, rgba(95,39,205,.12), transparent 60%)}
+  .bunny{position:absolute;font-size:22px;opacity:.55;animation:drift 9s ease-in-out infinite}
+  @keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+  .hero .tag{letter-spacing:.35em;font-size:12px;color:var(--cyan);text-transform:uppercase;margin-bottom:18px}
+  .hero h1{font-size:clamp(38px,7vw,72px);line-height:1.05;font-weight:800}
+  .hero h1 .res{color:var(--gold);display:block;font-size:.55em;letter-spacing:.18em;margin-top:8px}
+  .hero p{color:var(--sub);max-width:560px;margin:22px auto 34px;font-size:17px}
+  .btn{display:inline-block;padding:15px 44px;border-radius:12px;font-weight:700;text-decoration:none;transition:.25s;border:none;cursor:pointer;font-size:16px}
+  .btn-primary{background:var(--cyan);color:#0b1c1a;box-shadow:0 4px 28px rgba(78,205,196,.45)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(78,205,196,.6)}
+  .btn-ghost{border:1px solid var(--sub);color:var(--text);margin-left:12px}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+  .loop{margin-top:54px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:var(--sub)}
+  .loop b{padding:6px 13px;border-radius:20px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03)}
+  section{padding:88px 0}
+  .alt{background:var(--bg2)}
+  h2{font-size:34px;margin-bottom:14px}
+  .kicker{color:var(--cyan);letter-spacing:.3em;font-size:11px;text-transform:uppercase;margin-bottom:10px}
+  .lead{color:var(--sub);max-width:620px;margin-bottom:44px}
+  .grid{display:grid;gap:20px}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:26px;transition:.25s}
+  .card:hover{border-color:var(--cyan);transform:translateY(-4px)}
+  .card .ico{font-size:30px;margin-bottom:14px}
+  .card h3{font-size:18px;margin-bottom:8px}
+  .card p{color:var(--sub);font-size:14.5px}
+  .duel{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+  @media(max-width:760px){.duel{grid-template-columns:1fr}}
+  .duel > div{padding:40px 34px}
+  .duel .left{background:linear-gradient(160deg,#141428,#1A1A2E);border-right:1px solid rgba(255,255,255,.08)}
+  .duel .right{background:linear-gradient(160deg,#2b2118,#33261a)}
+  .duel h3{font-size:22px;margin-bottom:16px}
+  .duel ul{list-style:none}
+  .duel li{padding:9px 0;color:var(--sub);font-size:14.5px;border-bottom:1px dashed rgba(255,255,255,.08)}
+  .duel li:last-child{border:none}
+  .badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.1em;margin-bottom:16px}
+  .badge-red{background:rgba(233,69,96,.15);color:var(--red)}
+  .badge-gold{background:rgba(253,203,110,.15);color:var(--gold)}
+  .demo-box{display:flex;flex-direction:column;align-items:center;gap:26px;padding:44px 20px;background:rgba(0,0,0,.25);border-radius:20px;border:1px solid rgba(255,255,255,.08)}
+  .mgs{--p:1;--c:#4ECDC4;width:180px;height:180px;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;
+    background:conic-gradient(var(--c) calc(var(--p)*360deg), rgba(45,52,54,.9) 0)}
+  .mgs::before{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--bg)}
+  .mgs .num{position:relative;font-size:40px;font-weight:800;color:var(--c);text-shadow:0 0 16px var(--c)}
+  .mgs .lbl{position:relative;font-size:10px;letter-spacing:.3em;color:var(--sub);margin-top:2px}
+  .state-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .state-btns button{padding:9px 20px;border-radius:24px;border:1px solid rgba(255,255,255,.18);background:transparent;color:var(--text);cursor:pointer;font-size:13px;transition:.2s}
+  .state-btns button:hover{border-color:var(--cyan)}
+  .state-btns button.active{background:var(--cyan);color:#0b1c1a;border-color:var(--cyan);font-weight:700}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;text-align:center}
+  .stat b{display:block;font-size:38px;color:var(--cyan)}
+  .stat span{color:var(--sub);font-size:13px}
+  .road{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .phase{border-top:3px solid var(--cyan);padding-top:16px}
+  .phase b{color:var(--gold);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+  .phase h4{margin:8px 0 6px;font-size:16px}
+  .phase p{color:var(--sub);font-size:13.5px}
+  footer{padding:46px 0;text-align:center;color:var(--sub);font-size:13px;border-top:1px solid rgba(255,255,255,.07)}
+  footer .g{color:var(--cyan)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="bunny" style="left:12%;top:24%">🐇</span>
+  <span class="bunny" style="right:14%;top:36%;animation-delay:-3s">🐇</span>
+  <span class="bunny" style="left:22%;bottom:22%;animation-delay:-6s">🐇</span>
+  <span class="bunny" style="right:24%;bottom:16%;animation-delay:-1.5s">🐇</span>
+  <div class="tag">A short-session hybrid strategy game</div>
+  <h1 class="glow">THE WEAVER<span class="res glow">RESONANCE</span></h1>
+  <p>Stabilise a collapsing reality in intense 2–4 minute runs — then recover in a calm, luminous sanctuary. Failure isn't the end. It's the most beautiful part.</p>
+  <div>
+    <a class="btn btn-primary" href="https://github.com/zephy1995/the-weaver-resonance/tree/main/Assets/Scripts">View the Code</a>
+    <a class="btn btn-ghost" href="#loop">How it plays</a>
+  </div>
+  <div class="loop" id="loop">
+    <b style="color:var(--red)">Enter</b>→<b>Anchor</b>→<b>Stabilise</b>→<b style="color:var(--red)">Overload</b>→<b>Collapse</b>→<b style="color:var(--gold)">Dream</b>→<b style="color:var(--amber)">Upgrade</b>→<b>Repeat</b>
+  </div>
+</header>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="kicker">The Core Idea</div>
+    <h2>Two states. One emotional arc.</h2>
+    <p class="lead">Every session delivers tension → crisis → relief → growth. The frantic sector and the serene Dream Warren aren't two games — they're one feeling, split in half.</p>
+    <div class="duel">
+      <div class="left">
+        <span class="badge badge-red">THE SECTOR</span>
+        <h3 style="color:var(--red)">Frantic Stabilisation</h3>
+        <ul>
+          <li>⚓ Activate anchors under pressure — holds are interruptible by any hit</li>
+          <li>⛩ Place Torii Gates (max 2) to block the Drift</li>
+          <li>⚔ Survive Swarmers, Breakers and Phantoms</li>
+          <li>⚡ One bar — Mental Guard — drains constantly</li>
+          <li>📉 Below 30 MGS: <b style="color:var(--red)">Reality Fade</b> — input lag, ghosting, muffled audio, chromatic aberration</li>
+        </ul>
+      </div>
+      <div class="right">
+        <span class="badge badge-gold">DREAM WARREN</span>
+        <h3 style="color:var(--gold)">Beautiful Recovery</h3>
+        <ul>
+          <li>🐇 Tap Lume-Bunnies: +5 MGS each, satisfying pop</li>
+          <li>🛡 Stand near Rams the Guardian for passive regen</li>
+          <li>☁️ Zero enemies. Zero threat. Pure calm</li>
+          <li>💎 Earn Resonance Fragments for upgrades & cosmetics</li>
+          <li>✨ Collapse is not a game over — it's the reward</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">Interactive</div>
+    <h2>The Mental Guard System</h2>
+    <p class="lead">One circular meter is the entire game — health, sanity and stamina fused together. Tap a state to feel the shift:</p>
+    <div class="demo-box">
+      <div class="mgs" id="mgs"><div class="num" id="mgsNum">100</div><div class="lbl">MGS</div></div>
+      <div class="state-btns">
+        <button class="active" onclick="setMGS(100,this)">Stable</button>
+        <button onclick="setMGS(45,this)">Strain</button>
+        <button onclick="setMGS(18,this)">Reality Fade</button>
+        <button onclick="setMGS(0,this)">Collapse → Dream</button>
+      </div>
+      <div id="stateDesc" style="color:var(--sub);font-size:14px;min-height:22px">Clean glow. Full control. The sector is yours.</div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="kicker">Systems</div>
+    <h2>Built for 2–4 minute sessions</h2>
+    <p class="lead">One input = one action. The difficulty comes from decisions under pressure, not control complexity.</p>
+    <div class="grid grid-3">
+      <div class="card"><div class="ico">⚓</div><h3>Anchor System</h3><p>3–5 anchors per sector. Hold to channel (1.5–3s). Any damage interrupts. Complete all to stabilise the sector.</p></div>
+      <div class="card"><div class="ico">⛩</div><h3>Box Protocol</h3><p>Torii Gates block enemies and slow the Drift. Max 2 active, 8s shared cooldown, 3 hits from Breakers.</p></div>
+      <div class="card"><div class="ico">⚔</div><h3>Three Enemies</h3><p>Swarmers rush (fast, weak). Breakers siege anchors (slow, heavy). Phantoms phase unpredictably. Depth through behaviour, not count.</p></div>
+      <div class="card"><div class="ico">📉</div><h3>Reality Fade</h3><p>Below 30 MGS the world breaks: 100–300ms input delay, ghost frames, RGB split, low-pass audio, flickering UI.</p></div>
+      <div class="card"><div class="ico">🐇</div><h3>Dream Warren</h3><p>Collapse triggers a 20–40s sanctuary. Collect bunnies, rest by the guardian, restore to 70–100 MGS.</p></div>
+      <div class="card"><div class="ico">💎</div><h3>Ethical Progression</h3><p>Resonance Fragments buy upgrades & cosmetics. Never sell power. Monetise wanting to look cooler, not needing to win.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">Targets</div>
+    <h2>MVP by the numbers</h2>
+    <div class="stats">
+      <div class="stat"><b>3–4</b><span>minute sessions</span></div>
+      <div class="stat"><b>3</b><span>enemy types</span></div>
+      <div class="stat"><b>1</b><span>character, 1 loop</span></div>
+      <div class="stat"><b>40%</b><span>Day-1 retention target</span></div>
+      <div class="stat"><b>4 wks</b><span>to TestFlight-ready MVP</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="kicker">Roadmap</div>
+    <h2>Then scale</h2>
+    <div class="road">
+      <div class="phase"><b>Phase 1</b><h4>MVP</h4><p>1 sector, 3 enemies, 1 loop. iOS + WebGL. TestFlight in 4 weeks.</p></div>
+      <div class="phase"><b>Phase 2</b><h4>Content</h4><p>3 new sectors, 2 enemy types, daily challenges, social sharing. Months 2–3.</p></div>
+      <div class="phase"><b>Phase 3</b><h4>Revenue</h4><p>Season pass, cosmetic marketplace, premium mode. Target £10k–£50k/month. Months 4–6.</p></div>
+      <div class="phase"><b>Phase 4</b><h4>Platforms</h4><p>Android, Steam, Switch. Months 6–12.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><span class="g glow">✦ THE WEAVER: RESONANCE</span> — build exactly 1 level, 3 enemies, 1 character, 1 loop. Then test. Then scale.</p>
+    <p style="margin-top:10px;opacity:.6">Core systems implemented in Unity 2D (URP) · <a href="https://github.com/zephy1995/the-weaver-resonance" style="color:var(--cyan)">github.com/zephy1995/the-weaver-resonance</a></p>
+  </div>
+</footer>
+
+<script>
+  function setMGS(v, btn){
+    const mgs = document.getElementById('mgs');
+    const num = document.getElementById('mgsNum');
+    const desc = document.getElementById('stateDesc');
+    mgs.style.setProperty('--p', v/100);
+    num.textContent = v;
+    let color, text;
+    if(v === 0){ color = '#FDCB6E'; text = 'Collapse... the world whites out — and the Dream Warren blooms.'; }
+    else if(v < 30){ color = '#E94560'; text = 'Reality Fade: input lag, ghost frames, muffled audio. Hold on.'; }
+    else if(v < 60){ color = '#F7B731'; text = 'Strain: the pulse quickens. Tension rises. Gates matter now.'; }
+    else { color = '#4ECDC4'; text = 'Clean glow. Full control. The sector is yours.'; }
+    mgs.style.setProperty('--c', color);
+    num.style.color = color;
+    num.style.textShadow = '0 0 16px ' + color;
+    desc.textContent = text;
+    document.querySelectorAll('.state-btns button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if(v === 0){
+      setTimeout(()=>{
+        const b = document.querySelectorAll('.state-btns button')[0];
+        setMGS(100, b);
+      }, 2200);
+    }
+  }
+</script>
+</body>
+</html>
